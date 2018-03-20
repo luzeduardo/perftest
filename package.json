@@ -1,0 +1,11 @@
+{
+  "name": "perftest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:luzeduardo/perftest.git",
+  "author": "<luz.eduardo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
