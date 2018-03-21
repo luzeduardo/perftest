@@ -6,6 +6,7 @@
   "author": "<luz.eduardo@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "compression": "^1.7.2",
     "express": "^4.16.3",
     "pino": "^4.14.0",
     "response-time": "^2.3.2"
