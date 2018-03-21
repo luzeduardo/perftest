@@ -1,7 +1,6 @@
 'use strict'
 const responseTime = require('response-time');
 const express = require('express');
-const winston = require('winston');
 const pino = require('pino')()
 const PORT = process.env.port || 3000;
 const server = express();
