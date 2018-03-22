@@ -5,7 +5,9 @@ const pino = require('pino')();
 const compression = require('compression');
 const PORT = process.env.port || 3000;
 const server = express();
-
+const fs = require('fs');
+const bcrypt = require('bcrypt');
+server.disable('etag').disable('x-powered-by');
 server.use(compression());
 server.use(responseTime());
 
@@ -28,8 +30,13 @@ function slowFib(n) {
 }
 const fib = memoize(slowFib)
 
+const NUM_SALT_ROUNDS = 10;
+async function test() {
+  const pws = ['password', 'password1', 'passw0rd'];
+  return pws.map(pw => bcrypt.hash(pw, NUM_SALT_ROUNDS));
+}
 server.use('/', (req, res) => {
-  const num = Math.floor(Math.random() * 9)  
+  const num = Math.floor(Math.random() * 9)
   res.send(`Fib data --> ${fib(num)}`)
 });
 
