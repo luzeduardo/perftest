@@ -2,6 +2,7 @@
 const responseTime = require('response-time');
 const express = require('express');
 const pino = require('pino')();
+const helmet = require('helmet');
 const compression = require('compression');
 const PORT = process.env.port || 3000;
 const server = express();
@@ -10,6 +11,7 @@ const bcrypt = require('bcrypt');
 server.disable('etag').disable('x-powered-by');
 server.use(compression());
 server.use(responseTime());
+server.use(helmet());
 
 function memoize(fn) {
   const cache = {}
