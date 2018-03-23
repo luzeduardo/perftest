@@ -8,29 +8,13 @@ const PORT = process.env.port || 3000;
 const server = express();
 const fs = require('fs');
 const bcrypt = require('bcrypt');
+import { paralleliterator } from './iterableprotocol';
+import { fib } from './calculations';
+
 server.disable('etag').disable('x-powered-by');
 server.use(compression());
 server.use(responseTime());
 server.use(helmet());
-
-function memoize(fn) {
-  const cache = {}
-  return function(...args) {
-    if (cache[args]) {
-      return cache[args]
-    }
-    const res = fn.apply(this, args)
-    cache[args] = res
-    return res
-  }
-}
-function slowFib(n) {
-  if (n < 2) {
-    return n
-  }
-  return fib(n - 1) + fib(n - 2)
-}
-const fib = memoize(slowFib)
 
 const NUM_SALT_ROUNDS = 10;
 async function test() {
@@ -38,12 +22,13 @@ async function test() {
   return pws.map(pw => bcrypt.hash(pw, NUM_SALT_ROUNDS));
 }
 server.use('/', (req, res) => {
-  const num = Math.floor(Math.random() * 9)
+  const num = Math.floor(Math.random() * 99)
   res.send(`Fib data --> ${fib(num)}`)
 });
-
-pino.info('request test perf with pino logger')
-
-server.listen(PORT, () => {
-  console.log('Listem to them')
-});
+ 
+const data = [1,2,3,4,5,6,7,8,9]
+paralleliterator(data)
+// pino.info('request test perf with pino logger')
+// server.listen(PORT, () => {
+//   console.log('Listem to them')
+// });
