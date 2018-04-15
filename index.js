@@ -8,8 +8,8 @@ const PORT = process.env.port || 3000;
 const server = express();
 const fs = require('fs');
 const bcrypt = require('bcrypt');
-import { paralleliterator } from './iterableprotocol';
-import { fib } from './calculations';
+const paralleliterator = require('./iterableprotocol')
+const BinaryTree = require('./btree')
 
 server.disable('etag').disable('x-powered-by');
 server.use(compression());
@@ -21,14 +21,24 @@ async function test() {
   const pws = ['password', 'password1', 'passw0rd'];
   return pws.map(pw => bcrypt.hash(pw, NUM_SALT_ROUNDS));
 }
-server.use('/', (req, res) => {
-  const num = Math.floor(Math.random() * 99)
-  res.send(`Fib data --> ${fib(num)}`)
-});
- 
-const data = [1,2,3,4,5,6,7,8,9]
-paralleliterator(data)
-// pino.info('request test perf with pino logger')
-// server.listen(PORT, () => {
-//   console.log('Listem to them')
-// });
+
+const data = [...Array(999).keys()]
+
+function* foo(){
+  yield 'foo'
+}
+
+function* bar(){
+  yield 'a';
+  yield* foo()
+  yield 'b'
+}
+
+let tree = new BinaryTree('a', 
+new BinaryTree('b', 
+  new BinaryTree('c'), new BinaryTree('d')),
+new BinaryTree('e'))
+
+for (let data of tree) {
+  console.log(data)
+}

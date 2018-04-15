@@ -12,6 +12,4 @@ const paralleliterator = async (array) => {
   return await Promise.all(promises);
 }
 
-export {
-  paralleliterator
-}
+module.exports = paralleliterator;

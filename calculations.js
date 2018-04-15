@@ -6,7 +6,6 @@ function memoize(fn) {
     }
     const res = fn.apply(this, args)
     cache[args] = res
-    console.log(res)    
     return res
   }
 }

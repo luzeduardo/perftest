@@ -1,4 +1,10 @@
 {
-  "presets": ["es2015", "env"],
-  "plugins": ["transform-es2015-destructuring", "transform-object-rest-spread", "transform-class-properties"]
+  "presets": ["es2016", "env"],
+  "plugins": [
+    "transform-es2015-destructuring", 
+    "transform-object-rest-spread", 
+    "transform-class-properties",
+    "babel-plugin-transform-class-properties",
+    "babel-plugin-import"
+  ]
 }
