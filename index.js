@@ -24,21 +24,38 @@ async function test() {
 
 const data = [...Array(999).keys()]
 
-function* foo(){
+const a = function* foo(){
   yield 'foo'
 }
 
-function* bar(){
+const b = function* bar(){
   yield 'a';
-  yield* foo()
+  yield* a()
   yield 'b'
 }
+
+const it = function* iter(data) {
+  yield data
+}
+
+
+for(let x of [0, 1, 2, 3, 4, 5]){
+  console.log(x)
+}
+console.log(it().next(), '-->')
+for (let x= 0; x<= 10; x++){
+
+}
+
+//sub generator calls with spread 
+console.log(b().return('yes'))
+// console.log([...b()])
 
 let tree = new BinaryTree('a', 
 new BinaryTree('b', 
   new BinaryTree('c'), new BinaryTree('d')),
 new BinaryTree('e'))
 
-for (let data of tree) {
-  console.log(data)
-}
+// for (let data of tree) {
+//   console.log(data)
+// }
